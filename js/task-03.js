@@ -15,18 +15,30 @@ const images = [
 
 const galleryRef = document.querySelector('#gallery');
 
-const listGallery = images.map(elem => {
-  const liRef = document.createElement('li');
-  liRef.classList.add('img');
+// const listGallery = images.map(elem => {
+//   const liRef = document.createElement('li');
+//   liRef.classList.add('img');
 
-  const imgRef = document.createElement('img');
-  imgRef.width = 100;
-  imgRef.setAttribute(`src`, `${elem.url}`);
-  imgRef.setAttribute('alt', `${elem.alt}`);
+//   const imgRef = document.createElement('img');
+//   imgRef.width = 100;
+//   imgRef.setAttribute(`src`, `${elem.url}`);
+//   imgRef.setAttribute('alt', `${elem.alt}`);
 
-  liRef.append(imgRef);
+//   liRef.append(imgRef);
 
-  return liRef;
-});
+//   return liRef;
+// });
 
-galleryRef.append(...listGallery);
+// galleryRef.append(...listGallery);
+
+const createImg = ({ url, alt }) => {
+  return `<img class="img" src="${url}" alt="${alt}">`;
+};
+
+const createImgList = images => images.map(createImg).join('');
+
+const addItemsToGallery = (elem, template) => {
+  elem.insertAdjacentHTML('beforeend', template);
+};
+
+addItemsToGallery(galleryRef, createImgList(images));
